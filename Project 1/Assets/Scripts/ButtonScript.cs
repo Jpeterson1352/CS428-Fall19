@@ -13,10 +13,10 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
     // Start is called before the first frame update
     void Start()
     {
-        obj = GameObject.Find("totoro");
-        obj.SetActive(false);
+        obj = GameObject.Find("Reviewtotal");
+        obj.SetActive(true);
         audioData = GetComponent<AudioSource>();
-        button = GameObject.Find("VirtualButton");
+        button = GameObject.Find("VirtualButtonReview");
         button.GetComponent<VirtualButtonBehaviour>().RegisterEventHandler(this);
         objAnimation.GetComponent<Animator>();
         
@@ -24,8 +24,8 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
 
     public void OnButtonPressed(VirtualButtonBehaviour vb)
     {
-        obj.SetActive(true);
-        objAnimation.Play("TotoroAnimation");
+        obj.SetActive(false);
+        //objAnimation.Play("TotoroAnimation");
         audioData.Play(0);
         Debug.Log("Button Pressed");
 
@@ -34,7 +34,7 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
     public void OnButtonReleased(VirtualButtonBehaviour vb)
     {
         objAnimation.Play("none");
-        obj.SetActive(false);
+        obj.SetActive(true);
         audioData.Stop();
     }
 
