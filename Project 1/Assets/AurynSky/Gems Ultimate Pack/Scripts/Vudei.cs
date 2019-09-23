@@ -19,7 +19,7 @@ public class VirtualButton : MonoBehaviour, IVirtualButtonEventHandler
     void Start()
     {
         authorText = GameObject.Find("BackCoverText");
-        reviewText = GameObject.Find("Reviewtotal");
+        reviewText = GameObject.Find("reviewTotal");
         reviewText.SetActive(false);
         button = GameObject.Find("VirtualButton3");
         button.GetComponent<VirtualButtonBehaviour>().RegisterEventHandler(this);

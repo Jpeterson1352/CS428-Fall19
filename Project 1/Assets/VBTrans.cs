@@ -9,12 +9,14 @@ public class VBTrans : MonoBehaviour, IVirtualButtonEventHandler
     // Start is called before the first frame update
     public GameObject origText;
     public GameObject transText;
+    public GameObject authorText;
     public GameObject button;
-    public int current = 1;
+    private int current = 1;
+    public bool isActive = false;
 
     void Start()
     {
-        origText = GameObject.Find("reviewTotal");
+        //origText = GameObject.Find("reviewTotal");
         transText = GameObject.Find("Translated Content");
         transText.SetActive(false);
         button = GameObject.Find("VirtualButtonTrans");
@@ -24,29 +26,43 @@ public class VBTrans : MonoBehaviour, IVirtualButtonEventHandler
     // Update is called once per frame
     void Update()
     {
-
+        if(authorText.activeSelf)
+        {
+            isActive = true;
+        }
+        else
+        {
+            isActive = false;
+        }
     }
 
     public void OnButtonPressed(VirtualButtonBehaviour vb)
     {
-        if (current == 1)
+        if (!authorText.activeSelf)
         {
-            origText.SetActive(false);
-            transText.SetActive(true);
-
-            current = 2;
+            if (current == 1)
+            {
+                Debug.Log("setting translation active");
+                origText.SetActive(false);
+                transText.SetActive(true);
+                current = 2;
+            }
+            else
+            {
+                Debug.Log("setting translation inactive");
+                origText.SetActive(true);
+                transText.SetActive(false);
+                current = 1;
+            }
+            Debug.Log("author text is: " + isActive);
         }
-        if (current == 2)
-        {
-            origText.SetActive(true);
-            transText.SetActive(false);
-
-            current = 1;
-        }
+        
+        Debug.Log("Translation Button Pressed");
     }
 
     public void OnButtonReleased(VirtualButtonBehaviour vb)
     {
 
     }
+
 }

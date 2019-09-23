@@ -14,8 +14,8 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
     void Start()
     {
         obj = GameObject.Find("totoro");
-        obj.SetActive(true);
-        audioData = GetComponent<AudioSource>();
+        obj.SetActive(false);
+        audioData = obj.GetComponent<AudioSource>();
         button = GameObject.Find("VirtualButton1");
         button.GetComponent<VirtualButtonBehaviour>().RegisterEventHandler(this);
         objAnimation.GetComponent<Animator>();
@@ -24,7 +24,7 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
 
     public void OnButtonPressed(VirtualButtonBehaviour vb)
     {
-        obj.SetActive(false);
+        obj.SetActive(true);
         objAnimation.Play("TotoroAnimation");
         audioData.Play(0);
         Debug.Log("Button Pressed");
@@ -34,7 +34,7 @@ public class ButtonScript : MonoBehaviour, IVirtualButtonEventHandler
     public void OnButtonReleased(VirtualButtonBehaviour vb)
     {
         objAnimation.Play("none");
-        obj.SetActive(true);
+        obj.SetActive(false);
         audioData.Stop();
     }
 
